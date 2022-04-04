@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry, shareReplay } from 'rxjs/operators';
+import { catchError, finalize, map, retry, shareReplay } from 'rxjs/operators';
 import { DataModel } from '../model/data.model';
 import { environment } from 'src/environments/environment';
+import { LoadingService } from './loading.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConfigService {
     isLoadingResults = false;
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private loadingService: LoadingService) { }
 
     getData(): Observable<DataModel[]> {
+        this.loadingService.loadStart();
         const data: any = this.http.get<DataModel[]>(`${environment.apiURL}`)
             .pipe(
                 map(response => {
@@ -24,8 +26,11 @@ export class ConfigService {
                 shareReplay(),
                 catchError(() => {
                     return [];
-                  })
-                );
+                  }),
+                finalize(()=>{
+                    this.loadingService.loadComplete();
+                })
+            );
 
         return data;
     }
