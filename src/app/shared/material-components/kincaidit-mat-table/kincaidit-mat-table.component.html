@@ -1,0 +1,36 @@
+<div class="conatiner">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+
+<div *ngIf="dataSource?.filteredData.length==0">No records found.</div>
+<table *ngIf="dataSource?.filteredData.length!=0" mat-table matSort [dataSource]="dataSource">
+
+  <!-- version Column -->
+  <ng-container matColumnDef="version">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>
+    <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+  </ng-container>
+
+  <!-- environment Column -->
+  <ng-container matColumnDef="environment">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Environment </th>
+    <td mat-cell *matCellDef="let element"> {{element.environment}} </td>
+  </ng-container>
+
+  <!-- updateDate Column -->
+  <ng-container matColumnDef="updateDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Update Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.updateDate | date:'longDate' }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<mat-paginator  [length]="dataSource?.filteredData.length || 0"
+  [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" aria-label="Select page">
+</mat-paginator>
+</div>
