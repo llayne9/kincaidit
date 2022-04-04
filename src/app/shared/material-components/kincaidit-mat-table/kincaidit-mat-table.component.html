@@ -3,10 +3,11 @@
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
 
-
-<div *ngIf="dataSource?.filteredData.length==0">No records found.</div>
-<table *ngIf="dataSource?.filteredData.length!=0" mat-table matSort [dataSource]="dataSource">
-
+  
+  <div *ngIf="dataSource?.filteredData.length==0">No records found.</div>
+  <app-loader></app-loader>
+  <table *ngIf="dataSource?.filteredData.length!=0" mat-table matSort [dataSource]="dataSource">
+    
   <!-- version Column -->
   <ng-container matColumnDef="version">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>

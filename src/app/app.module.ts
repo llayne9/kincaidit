@@ -7,11 +7,14 @@ import { KincaiditMatTableComponent } from './shared/material-components/kincaid
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/material.module';
 import { ConfigService } from './service/config.service';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { LoadingService } from './service/loading.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     KincaiditMatTableComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,7 @@ import { ConfigService } from './service/config.service';
     HttpClientModule,
     MaterialModule,
   ],
-  providers: [ConfigService],
+  providers: [ConfigService, LoadingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

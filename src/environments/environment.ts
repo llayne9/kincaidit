@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiURL: 'https://admin.kincaidit.com/api/',
-  apiURL: 'assets/data.json',
+  apiURL: 'https://admin.kincaidit.com/api/',
+  // apiURL: 'assets/data.json',
 };
 
 /*

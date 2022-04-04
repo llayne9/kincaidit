@@ -26,7 +26,7 @@ export class KincaiditMatTableComponent implements OnInit {
   public displayedColumns: string[] = ['version', 'environment', 'updateDate'];
   public dataSource$: Observable<DataModel[]>;
   dataSource: MatTableDataSource<DataModel>;
-  pageSize = 3;
+  pageSize = 1;
   pageSizeOptions = [];
 
   constructor(
